@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BiCloudUpload } from "react-icons/bi";
 import { GoDiffAdded } from "react-icons/go";
 import ActivityCard from "./ActivityCard";
+import { TimePicker } from "./TimePicker";
 import {
   newActivity,
   addActivity,
@@ -113,13 +114,13 @@ const CreateActivityForm = ({ typeAction }) => {
         {errors.nameActivity.status && (
           <p className="text-primaryPink text-xs">{errors.nameActivity.msj}</p>
         )}
+
         <label
           htmlFor="desc-activity"
           className="block mb-1 text-sm font-medium text-primaryDark mt-3"
         >
           Description Activity
         </label>
-
         <input
           id="desc-activity"
           type="text"
@@ -131,6 +132,20 @@ const CreateActivityForm = ({ typeAction }) => {
         />
         {errors.descActivity.status && (
           <p className="text-primaryPink text-xs">{errors.descActivity.msj}</p>
+        )}
+
+        <label
+          htmlFor="desc-activity"
+          className="block mb-1 text-sm font-medium text-primaryDark mt-3"
+        >
+          Minimum Activity Time (MM:SS)
+        </label>
+        <TimePicker
+          activity={activity}
+          handleActivity={handleActivity}
+        />
+        {errors.timeActivity.status && (
+          <p className="text-primaryPink text-xs">{errors.timeActivity.msj}</p>
         )}
 
         {isLoading ? (

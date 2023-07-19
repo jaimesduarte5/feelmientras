@@ -40,6 +40,8 @@ const AgentViewCourse = () => {
   const [contador, setContador] = useState(0);
   const [file, setFile] = useState(false);
   const [activity, setActivity] = useState(null);
+  const [minTime, setMinTime] = useState(10)
+  const [isCompleteActivity, setIsCompleteActivity] = useState(false)
 
   useEffect(() => {
     if (idCourse) {
@@ -75,6 +77,22 @@ const AgentViewCourse = () => {
     setLoading(false);
   }, [course]);
 
+  useEffect(() => {
+    if (minTime <= 0) {
+      setIsCompleteActivity(true)
+      return
+    }
+
+    setIsCompleteActivity(false)
+    const timeoutId = setTimeout(() => {
+      setMinTime(prevState => prevState - 1)
+    }, 1000)
+
+    return () => {
+      clearTimeout(timeoutId)
+    }
+  }, [minTime])
+
   // funcion para registrar  una actividad completa en la DB
   const completeActivity = async () => {
     setModal(false);
@@ -106,6 +124,7 @@ const AgentViewCourse = () => {
   const changeActivity = async (act, indice) => {
     setContador(indice || 0);
     setActivity(act);
+    setMinTime(act?.timeActivity || 10);
     setfirst(false);
 
     //crea la carpeta temporal en el servidor para cargar paquetes scorm
@@ -197,6 +216,12 @@ const AgentViewCourse = () => {
     };
   };
 
+  const normalizeTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const secondsLeft = seconds % 60;
+    return `${minutes < 10 ? `0${minutes}` : minutes }:${secondsLeft < 10 ? `0${secondsLeft}` : secondsLeft}`;
+  };
+
   if (isLoading)
     return (
       <div className="w-full h-56 flex justify-center items-center">
@@ -268,7 +293,19 @@ const AgentViewCourse = () => {
                     : "flex flex-col    h-full  w-full order-1 lg:order-2"
                 }`}
           >
-            <p className="text-primaryPink text-md font-semibold text-center my-6 underline outline-offset-2">
+            <div className="flex p-2 rounded-md">
+              <div className="bg-white rounded-l-md p-2 w-full">
+                <p className="text-primaryPink text-center text-sm font-semibold outline-offset-2">
+                  TIME FOR NEXT ACTIVITY
+                </p>
+              </div>
+              <div className="bg-primaryPink rounded-r-md p-2 flex items-center w-16">
+                <p className="text-white text-center text-sm font-semibold">
+                  {normalizeTime(minTime)}
+                </p>
+              </div>
+            </div>
+            <p className="bg-primary-pink text-primaryPink text-md font-semibold text-center my-4 underline outline-offset-2">
               MODULE
             </p>
             <ActivitiesModule
@@ -284,7 +321,7 @@ const AgentViewCourse = () => {
                   {activity?.idActivity ===
                   activities[activities.length - 1]?.idActivity ? (
                     <button
-                      className="w-full md:w-auto mb-4 md:mb-0  text-primaryPink font-medium bg-white rounded-md px-3 py-1 hover:bg-primaryPink hover:text-white transition ease-in-out duration-150 "
+                      className={`w-full md:w-auto mb-4 md:mb-0 text-primaryPink font-medium bg-white rounded-md px-3 py-1 hover:bg-primaryPink hover:text-white transition ease-in-out duration-150 ${loadingUpTracks || !isCompleteActivity ? 'opacity-50 cursor-not-allowed' : ''}`}
                       onClick={handleEndCourse}
                     >
                       Complete the Course
@@ -292,10 +329,10 @@ const AgentViewCourse = () => {
                   ) : (
                     activity?.typeContent !== 1 && (
                       <button
-                        className="w-full md:w-auto mb-4 md:mb-0  text-primaryPink font-medium bg-white rounded-md px-3 py-1 hover:bg-primaryPink hover:text-white transition ease-in-out duration-150 "
+                        className={`w-full md:w-auto mb-4 md:mb-0 text-primaryPink font-medium bg-white rounded-md px-3 py-1 hover:bg-primaryPink hover:text-white transition ease-in-out duration-150 ${loadingUpTracks || !isCompleteActivity ? 'opacity-50 cursor-not-allowed' : ''}`}
                         onClick={confirmActivity}
                         //onClick={completeActivity}
-                        disabled={loadingUpTracks ? true : false}
+                        disabled={loadingUpTracks || !isCompleteActivity ? true : false}
                       >
                         Complete Activity {contador + 1}
                       </button>

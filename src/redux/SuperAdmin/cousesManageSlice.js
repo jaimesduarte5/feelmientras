@@ -22,11 +22,15 @@ const initialState = {
     },
     nameActivity: {
       status: false,
-      msj: "The name of the arctivity is requiered",
+      msj: "The name of the activity is requiered",
     },
     descActivity: {
       status: false,
-      msj: "The  arctivity requiered a description",
+      msj: "The activity requiered a description",
+    },
+    timeActivity: {
+      status: false,
+      msj: "The activity requiered a min time",
     },
     urlActivity: { status: false, msj: "Need to load a resource" },
   },
@@ -43,6 +47,7 @@ const initialState = {
     nameActivity: "",
     typeContent: 0,
     urlActivity: "",
+    timeActivity: 0,
   },
   activities: [],
 };
