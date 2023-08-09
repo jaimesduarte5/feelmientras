@@ -1,5 +1,6 @@
 import { Fragment } from 'react'
 import { useDispatch } from 'react-redux'
+import { BiAngry, BiSad, BiMeh, BiSmile, BiHappy } from 'react-icons/bi'
 import { postTsat } from '../../redux/User/coursesAgentSlice'
 
 export const Form = ({
@@ -37,11 +38,21 @@ export const Form = ({
         <fieldset className='grid grid-cols-2 gap-x-4 gap-y-3'>
           <h3 className='bg-primaryPink text-white p-2 text-center text-lg font-semibold outline-offset-2 rounded'>{title}</h3>
           <div className='grid grid-cols-5 gap-x-4 items-center justify-items-center' >
-            <i className='flex relative items-center justify-center bg-primaryPink text-white w-11 h-11 rounded'>a</i>
-            <i className='flex relative items-center justify-center bg-primaryPink text-white w-11 h-11 rounded'>b</i>
-            <i className='flex relative items-center justify-center bg-primaryPink text-white w-11 h-11 rounded'>c</i>
-            <i className='flex relative items-center justify-center bg-primaryPink text-white w-11 h-11 rounded'>d</i>
-            <i className='flex relative items-center justify-center bg-primaryPink text-white w-11 h-11 rounded'>e</i>
+            <i className='flex relative items-center justify-center bg-primaryPink text-white w-11 h-11 rounded'>
+              <BiAngry className='w-full h-full p-1' />
+            </i>
+            <i className='flex relative items-center justify-center bg-primaryPink text-white w-11 h-11 rounded'>
+              <BiSad className='w-full h-full p-1' />
+            </i>
+            <i className='flex relative items-center justify-center bg-primaryPink text-white w-11 h-11 rounded'>
+              <BiMeh className='w-full h-full p-1' />
+            </i>
+            <i className='flex relative items-center justify-center bg-primaryPink text-white w-11 h-11 rounded'>
+              <BiSmile className='w-full h-full p-1' />
+            </i>
+            <i className='flex relative items-center justify-center bg-primaryPink text-white w-11 h-11 rounded'>
+              <BiHappy className='w-full h-full p-1' />
+            </i>
           </div>
           {options.map(({ id, title, value }) =>
             <Fragment key={id}>
