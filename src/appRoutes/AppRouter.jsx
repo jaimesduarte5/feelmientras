@@ -18,6 +18,7 @@ import POCUserManagement from "../pages/poc/POCUserManagement";
 import LogoutPage from "../pages/LogoutPage";
 import HomeUser from "../pages/user/HomeUser";
 import MyActivities from "../pages/user/MyActivities";
+import Tsat from "../pages/user/Tsat";
 import AgentViewCourse from "../pages/user/AgentViewCourse";
 import ExternalContentManage from "../pages/admin/ExternalContentManage";
 import HomeViewer from "../pages/viewer/HomeViewer";
@@ -43,6 +44,7 @@ const rutasUser = [
   { ruta: "/login", element: <Navigate to="/admin/home" /> },
   { ruta: "/user/home", element: <HomeUser /> },
   { ruta: "/user/my-activities", element: <MyActivities /> },
+  { ruta: "/user/tsat", element: <Tsat /> },
   { ruta: "/user/course/:idCourse/:idLp", element: <AgentViewCourse /> },
   { ruta: "*", element: <Error404 /> },
 ];

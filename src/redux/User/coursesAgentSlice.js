@@ -148,3 +148,25 @@ export const postAgentTrackEvents = createAsyncThunk(
     return;
   }
 );
+
+//funcion para el manejo de eventos de seguimiento a un Learning Plan, Curso o Actividad
+export const postTsat = createAsyncThunk(
+  "data/posttsat",
+  async (params, ThunkAPI) => {
+
+    ThunkAPI.dispatch(loadingUpTracks(true));
+    const data = await reqWithData("a/posttsat", {
+      ...params,
+    });
+
+    if (data.error) {
+      ThunkAPI.dispatch(loadingUpTracks(false));
+    }
+    //let actualization = true;
+    //const { idCourse, idCampaign } = params;
+    //ThunkAPI.dispatch(getCourse({ idCourse, idCampaign, actualization }));
+    ThunkAPI.dispatch(loadingUpTracks(false));
+
+    return;
+  }
+);
