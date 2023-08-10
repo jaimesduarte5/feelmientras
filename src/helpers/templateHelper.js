@@ -12,7 +12,7 @@ const defaultHeadersADM = [
 	"Hire Day",
 	"Hire Month",
 	"Hire Year",
-	"id Wave"
+	"Id Wave"
 ];
 const defaultHeadersPOC = [
 	"Ident",
@@ -25,7 +25,7 @@ const defaultHeadersPOC = [
 	"Hire Day",
 	"Hire Month",
 	"Hire Year",
-	"Wave",
+	"Id Wave",
 ];
 const defaultHeadersViewer = [
 	"Name",
@@ -336,7 +336,7 @@ export const validateFields = (data, userData) => {
 				hireD: row[7],
 				hireM: row[8],
 				hireY: row[9],
-				idWave: row[10]
+				wave: row[10]
 			};
 			if (row.length !== defaultHeadersADM.length) {
 				rep.push({ ...obj, row: `row # ${i + 2} with extra fields` });
@@ -456,7 +456,7 @@ export const validateFields = (data, userData) => {
 					if (col === undefined || col === "") {
 						obj = {
 							...obj,
-							idWave: `Empty value in the row # ${i + 2}, field Wave`,
+							wave: `Empty value in the row # ${i + 2}, field Wave`,
 						};
 						return true;
 					}
@@ -587,7 +587,7 @@ export const feedbackSheet = async (data, userData) => {
 				{ header: "Hire Day", key: "hireD" },
 				{ header: "Hire Month", key: "hireM" },
 				{ header: "Hire Year", key: "hireY" },
-				{ header: "Wave", key: "wave" },
+				{ header: "Id Wave", key: "wave" },
 			];
 			worksheet.addRows(data);
 		};
@@ -618,7 +618,7 @@ export const feedbackSheet = async (data, userData) => {
 				{ header: "Hire Day", key: "hireD" },
 				{ header: "Hire Month", key: "hireM" },
 				{ header: "Hire Year", key: "hireY" },
-				{ header: "id Wave", key: "idWave" }
+				{ header: "Id Wave", key: "wave" }
 			];
 			worksheet.addRows(data);
 		};
