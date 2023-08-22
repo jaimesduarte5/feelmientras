@@ -2,9 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { HiOutlineHome } from "react-icons/hi";
 import { TbBooks } from "react-icons/tb";
-import { GiDart } from "react-icons/gi"
 
-const rutas = [{ ruta: "/user/home" }, { ruta: "/user/my-activities" }, { ruta: "/user/tsat" }];
+const rutas = [{ ruta: "/user/home" }, { ruta: "/user/my-activities" }];
 
 export const Ruta = ({ pathname, ruta }) => {
   return (
@@ -18,9 +17,6 @@ export const Ruta = ({ pathname, ruta }) => {
         )}
         {ruta === "/user/my-activities" && (
           <TbBooks size={25} color={pathname === ruta ? "#FF0082" : ""} />
-        )}
-        {ruta === "/user/tsat" && (
-          <GiDart size={25} color={pathname === ruta ? "#FF0082" : ""} />
         )}
       </span>
     </Link>
