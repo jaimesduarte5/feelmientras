@@ -428,8 +428,8 @@ export const updateCamp = createAsyncThunk(
 				title: params.context === 1 ? "Update!" : "Delete!",
 				msj:
 					params.context === 1
-						? "The Campaign is update!"
-						: "The Campaign is delete!",
+						? "The update has been completed"
+						: "The delete has been completed",
 				show: true,
 			})
 		);

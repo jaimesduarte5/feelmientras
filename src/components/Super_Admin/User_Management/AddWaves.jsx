@@ -143,7 +143,7 @@ const AddWaves = ({ onClose }) => {
 								}
 								onClick={() => dispatch(changeType("create"))}
 							>
-								create
+								Create
 							</button>
 							<button
 								className={
@@ -153,7 +153,7 @@ const AddWaves = ({ onClose }) => {
 								}
 								onClick={() => dispatch(changeType("update"))}
 							>
-								update
+								Update
 							</button>
 							<button
 								className={

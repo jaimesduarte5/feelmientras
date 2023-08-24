@@ -1,7 +1,7 @@
 export const valAssignChanges = (courses, lps, dbCourses, dbLPs) => {
   if (dbCourses.length === 0 && dbLPs.length === 0) {
     if (courses.length === 0 && lps.length === 0) {
-      return { error: "no selecciono nada y en db no hay nada" };
+      return { error: "Nothing has been selected and in DB there is nothing" };
     }
     const dts = dataToSend(courses, lps);
     return dts;
@@ -16,7 +16,7 @@ export const valAssignChanges = (courses, lps, dbCourses, dbLPs) => {
       courses.length === 0 &&
       lps.length === dbLPs.length
     ) {
-      return { error: "no se cambio nada" };
+      return { error: "Nothing has been changed" };
     }
     const dts = dataToSend(courses, lps);
     return dts;
@@ -31,7 +31,7 @@ export const valAssignChanges = (courses, lps, dbCourses, dbLPs) => {
       lps.length === 0 &&
       courses.length === dbCourses.length
     ) {
-      return { error: "no se cambio nada" };
+      return { error: "Nothing has been changed" };
     }
     const dts = dataToSend(courses, lps);
     return dts;
@@ -60,7 +60,7 @@ export const valAssignChanges = (courses, lps, dbCourses, dbLPs) => {
     lps.length === dbLPs.length &&
     courses.length === dbCourses.length
   ) {
-    return { error: "no se cambio nada, sigue igual que en db" };
+    return { error: "Nothing has been changed and in DB it remains the same" };
   }
 
   const dts = dataToSend(courses, lps);

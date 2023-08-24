@@ -1,4 +1,4 @@
-"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -261,7 +261,7 @@ var updateUser = (0, _toolkit.createAsyncThunk)("data/updateUser", function _cal
           ThunkAPI.dispatch((0, _alertsSlice.showToast)({
             type: "success",
             title: "User Updated",
-            msj: "the user was update",
+            msj: "The user has been updated",
             show: true,
             duration: 4000
           }));
@@ -325,7 +325,7 @@ var createUser = (0, _toolkit.createAsyncThunk)("data/createUser", function _cal
           ThunkAPI.dispatch((0, _alertsSlice.showToast)({
             type: "success",
             title: "User Created",
-            msj: "the user was create",
+            msj: "The user has been created",
             show: true,
             duration: 4000
           }));
@@ -404,7 +404,7 @@ var deleteUser = (0, _toolkit.createAsyncThunk)("data/deleteUser", function _cal
           ThunkAPI.dispatch((0, _alertsSlice.showToast)({
             type: "success",
             title: "Delete!",
-            msj: "The POC is delete!",
+            msj: "The POC has been deleted",
             show: true
           }));
           return _context3.abrupt("return", ThunkAPI.dispatch((0, _alertsSlice.fullLoadingOff)()));

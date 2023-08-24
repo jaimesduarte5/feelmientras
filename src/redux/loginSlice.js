@@ -29,7 +29,7 @@ export const loginSubmit = createAsyncThunk(
               showToast({
                 type: "warning",
                 title: "You don´t have access",
-                msj: "you dont assign in any Campaign",
+                msj: "You are not assign to any Campaign",
                 show: true,
               })
             );
@@ -40,7 +40,7 @@ export const loginSubmit = createAsyncThunk(
             showToast({
               type: "warning",
               title: "You don´t have access",
-              msj: "Problrem with your creation",
+              msj: "Problems with your creation",
               show: true,
             })
           );

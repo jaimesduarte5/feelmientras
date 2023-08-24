@@ -60,7 +60,7 @@ const CampaignContent = () => {
         {/* cabecera  */}
         <div>
           <h3 className="text-primaryPink font-medium text-2xl">
-            Campaign, LOB´s and Content{" "}
+            Campaigns, LOBs and Content{" "}
           </h3>
           <div className="my-6">
             <button

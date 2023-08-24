@@ -218,7 +218,7 @@ export const updateUser = createAsyncThunk(
       showToast({
         type: "success",
         title: "User Updated",
-        msj: "the user was update",
+        msj: "The user has been updated",
         show: true,
         duration: 4000,
       })
@@ -255,7 +255,7 @@ export const createUser = createAsyncThunk(
       showToast({
         type: "success",
         title: "User Created",
-        msj: "the user was create",
+        msj: "The user has been created",
         show: true,
         duration: 4000,
       })
@@ -309,7 +309,7 @@ export const deleteUser = createAsyncThunk(
       showToast({
         type: "success",
         title: "Delete!",
-        msj: "The User is delete!",
+        msj: "The user has been deleted",
         show: true,
       })
     );

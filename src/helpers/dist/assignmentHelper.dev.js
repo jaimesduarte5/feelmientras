@@ -1,4 +1,4 @@
-"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -9,7 +9,7 @@ var valAssignChanges = function valAssignChanges(courses, lps, dbCourses, dbLPs)
   if (dbCourses.length === 0 && dbLPs.length === 0) {
     if (courses.length === 0 && lps.length === 0) {
       return {
-        error: "no selecciono nada y en db no hay nada"
+        error: "Nothing has been selected and in DB there is nothing"
       };
     }
 
@@ -27,7 +27,7 @@ var valAssignChanges = function valAssignChanges(courses, lps, dbCourses, dbLPs)
 
     if (_valLPList.length === lps.length && courses.length === 0 && lps.length === dbLPs.length) {
       return {
-        error: "no se cambio nada"
+        error: "Nothing has been changed"
       };
     }
 
@@ -45,7 +45,7 @@ var valAssignChanges = function valAssignChanges(courses, lps, dbCourses, dbLPs)
 
     if (_valCList.length === courses.length && lps.length === 0 && courses.length === dbCourses.length) {
       return {
-        error: "no se cambio nada"
+        error: "Nothing has been changed"
       };
     }
 
@@ -71,7 +71,7 @@ var valAssignChanges = function valAssignChanges(courses, lps, dbCourses, dbLPs)
 
   if (valLPList.length === lps.length && valCList.length === courses.length && lps.length === dbLPs.length && courses.length === dbCourses.length) {
     return {
-      error: "no se cambio nada, sigue igual que en db"
+      error: "Nothing has been changed and in DB it remains the same"
     };
   }
 
