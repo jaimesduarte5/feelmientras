@@ -9,30 +9,46 @@ const initialState = {
   campaigns: [],
   courses: [],
   errors: {
-    idCampaign: { status: false, msj: "You need to select a campaign" },
-    nameCourse: { status: false, msj: "The name of the course is required" },
+    idCampaign: {
+      status: false,
+      msj: "You need to select a campaign"
+    },
+    nameCourse: {
+      status: false,
+      msj: "The name of the course is required"
+    },
     nameCourseFound: {
       status: false,
       msj: "There is a course with the same name",
     },
-    descCourse: { status: false, msj: "All courses required a description" },
+    descCourse: {
+      status: false,
+      msj: "All courses required a description"
+    },
+    idTsat: {
+      status: false,
+      msj: "The Tsat is required",
+    },
     activities: {
       status: false,
       msj: "The course requires at least one activity",
     },
     nameActivity: {
       status: false,
-      msj: "The name of the activity is requiered",
+      msj: "The name of the activity is required",
     },
     descActivity: {
       status: false,
-      msj: "The activity requiered a description",
+      msj: "The activity required a description",
     },
     timeActivity: {
       status: false,
-      msj: "The activity requiered a min time",
+      msj: "The activity required a min time",
     },
-    urlActivity: { status: false, msj: "Need to load a resource" },
+    urlActivity: {
+      status: false,
+      msj: "Need to load a resource"
+    },
   },
   newCourse: {
     descCourse: "",
@@ -50,6 +66,7 @@ const initialState = {
     timeActivity: 0,
   },
   activities: [],
+  tsats: []
 };
 
 export const courseSlice = createSlice({
@@ -63,6 +80,7 @@ export const courseSlice = createSlice({
         isLoading: action.payload,
       };
     },
+
     //trae los cursos de la base de datos
     getCourses: (state, action) => {
       return {
@@ -71,6 +89,7 @@ export const courseSlice = createSlice({
         courses: action.payload.courses,
       };
     },
+
     //crea un curso de manera local
     addCourse: (state, action) => {
       return {
@@ -81,6 +100,7 @@ export const courseSlice = createSlice({
         },
       };
     },
+
     //crear actividades temporales para agregar a un curso
     newActivity: (state, action) => {
       return {
@@ -114,6 +134,7 @@ export const courseSlice = createSlice({
         },
       };
     },
+
     //
     cleanCourse: (state) => {
       return {
@@ -128,11 +149,20 @@ export const courseSlice = createSlice({
         newCourse: action.payload,
       };
     },
-    //maneja el estado de los errores de creacion de cursos y actividades
+
+    //Maneja el estado de los errores de creacion de cursos y actividades
     errorsValidation: (state, action) => {
       return {
         ...state,
         errors: { ...state.errors, ...action.payload },
+      };
+    },
+
+    //Trae los tsats
+    getTsats: (state, action) => {
+      return {
+        ...state,
+        tsats: action.payload,
       };
     },
   },
@@ -148,6 +178,7 @@ export const {
   addActivity,
   orderActivities,
   errorsValidation,
+  getTsats,
 } = courseSlice.actions;
 
 export default courseSlice.reducer;
@@ -287,7 +318,6 @@ export const deleteCourses = createAsyncThunk(
 );
 
 //funcion para editar cursos en la base de datos
-
 export const sendCourseEdit = createAsyncThunk(
   "data/su/editCourses",
   async (course, ThunkAPI) => {
@@ -387,5 +417,35 @@ export const deleteActivityDB = createAsyncThunk(
       );
     }
     return;
+  }
+);
+
+//Funcion para obtener los tipos de Tsats
+export const getTsatTypes = createAsyncThunk(
+  "data/getTsatTypes",
+  async (account, ThunkAPI) => {
+    ThunkAPI.dispatch(loadingCourses(true));
+
+    const tsats = await reqWithData("gettsattypes");
+
+    if (tsats.error) {
+      ThunkAPI.dispatch(loadingCourses(false));
+
+      return ThunkAPI.dispatch(
+        showToast({
+          type: "warning",
+          title: "Error",
+          msj: "We have a problem with tsats",
+          show: true,
+          duration: 4000,
+        })
+      );
+    }
+
+    let resp = tsats.data
+
+    ThunkAPI.dispatch(loadingCourses(false));
+
+    return ThunkAPI.dispatch(getTsats(resp));
   }
 );

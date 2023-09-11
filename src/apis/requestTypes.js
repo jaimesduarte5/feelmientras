@@ -19,6 +19,7 @@ export const reqWithData = async (url, data) => {
     return Promise.resolve({ data: null, error: error });
   }
 };
+
 //peticiones que se envia un body con headers para cargar archivos en fb desde el back
 export const upFileData = async (url, data) => {
   const user = decrypt(sessionStorage.getItem("userFeel"));

@@ -1,4 +1,4 @@
-"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -56,11 +56,11 @@ var initialState = {
     },
     nameActivity: {
       status: false,
-      msj: "The name of the arctivity is requiered"
+      msj: "The name of the arctivity is required"
     },
     descActivity: {
       status: false,
-      msj: "The  arctivity requiered a description"
+      msj: "The  arctivity required a description"
     },
     urlActivity: {
       status: false,

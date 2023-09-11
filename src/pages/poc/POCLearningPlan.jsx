@@ -16,6 +16,7 @@ import {
   searchLPs,
   updateLPs,
   viewLPModal,
+  getTsatTypes,
 } from "../../redux/POC/learningPlanSlice";
 import { useEffect } from "react";
 import { fullLoadingOn } from "../../redux/alertsSlice";
@@ -66,6 +67,10 @@ const POCLearningPlan = () => {
       lpInitData({ idCampaign: userData.idCampaign, idLob: userData.idLob })
     );
   }, []);
+
+  useEffect(() => {
+    dispatch(getTsatTypes())
+  }, [])
 
   return (
     <div className="w-full min-h-full bg-primaryDark bg-opacity-75 rounded-lg p-4">

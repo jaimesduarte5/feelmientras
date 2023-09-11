@@ -94,7 +94,7 @@ const CreateActivityForm = ({ typeAction }) => {
 
   return (
     <div className="w-80 lg:w-96 bg-white rounded-xl pr-1">
-      <div className="p-2 lg:p-5 mt-3 overflow-y-scroll custom-scroll h-72 md:h-80 lg:h-96 ">
+      <div className="p-2 lg:p-5 mt-3 overflow-y-scroll custom-scroll h-auto ">
         <label
           htmlFor="name-activity"
           className="block mb-1 text-sm font-medium text-primaryDark "

@@ -1,4 +1,4 @@
-"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -25,11 +25,11 @@ var valCourse = function valCourse(data) {
     },
     nameActivity: {
       status: false,
-      msj: "The name of the arctivity is requiered"
+      msj: "The name of the arctivity is required"
     },
     descActivity: {
       status: false,
-      msj: "The  arctivity is requiered a description"
+      msj: "The  arctivity is required a description"
     },
     urlActivity: {
       status: false,
@@ -87,11 +87,11 @@ var valActivity = function valActivity(data) {
     },
     nameActivity: {
       status: false,
-      msj: "The name of the arctivity is requiered"
+      msj: "The name of the arctivity is required"
     },
     descActivity: {
       status: false,
-      msj: "The  arctivity is requiered a description"
+      msj: "The  arctivity is required a description"
     },
     urlActivity: {
       status: false,

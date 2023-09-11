@@ -11,16 +11,35 @@ const initialState = {
   lpSelected: [],
   dataCourses: [],
   dbDataCourses: [],
-  form: { name: "", description: "", courses: [] },
+  form: {
+    name: "",
+    description: "",
+    courses: [],
+    idTsat: 0
+  },
   errorForm: {
-    name: { value: false, desc: "" },
-    description: { value: false, desc: "" },
-    courses: { value: false, desc: "" },
+    name: {
+      value: false,
+      desc: ""
+    },
+    description: {
+      value: false,
+      desc: ""
+    },
+    courses: {
+      value: false,
+      desc: ""
+    },
+    idTsat: {
+      value: false,
+      desc: ""
+    }
   },
   dbFormCourses: [],
   tempFormCourses: [],
   courseSearch: "",
   lpSearch: "",
+  tsats: []
 };
 
 export const learningPlanSlice = createSlice({
@@ -66,13 +85,24 @@ export const learningPlanSlice = createSlice({
       };
     },
     coursesOrder: (state, action) => {
-      return { ...state, dataCourses: action.payload, changeOrder: true };
+      return {
+        ...state,
+        dataCourses: action.payload,
+        changeOrder: true
+      };
     },
     cancelOrder: (state, action) => {
-      return { ...state, dataCourses: state.dbDataCourses, changeOrder: false };
+      return {
+        ...state,
+        dataCourses: state.dbDataCourses,
+        changeOrder: false
+      };
     },
     errorLPForm: (state, action) => {
-      return { ...state, errorForm: action.payload };
+      return {
+        ...state,
+        errorForm: action.payload
+      };
     },
     formLPChanges: (state, action) => {
       return {
@@ -157,6 +187,13 @@ export const learningPlanSlice = createSlice({
         lpSearch: action.payload,
       };
     },
+    //Trae los tsats
+    getTsats: (state, action) => {
+      return {
+        ...state,
+        tsats: action.payload,
+      };
+    },
   },
 });
 
@@ -175,6 +212,7 @@ export const {
   searchFormCourses,
   searchLPs,
   errorLPForm,
+  getTsats
 } = learningPlanSlice.actions;
 
 export default learningPlanSlice.reducer;
@@ -299,5 +337,34 @@ export const updateLPs = createAsyncThunk(
       );
     }
     return ThunkAPI.dispatch(lpInitData(params.rfsh));
+  }
+);
+
+//Funcion para obtener los tipos de Tsats
+export const getTsatTypes = createAsyncThunk(
+  "data/getTsatTypes",
+  async (account, ThunkAPI) => {
+
+    const tsats = await reqWithData("gettsattypes");
+
+    if (tsats.error) {
+      ThunkAPI.dispatch(fullLoadingOff());
+
+      return ThunkAPI.dispatch(
+        showToast({
+          type: "warning",
+          title: "Error",
+          msj: "We have a problem with tsats",
+          show: true,
+          duration: 4000,
+        })
+      );
+    }
+
+    let resp = tsats.data
+
+    ThunkAPI.dispatch(fullLoadingOff());
+
+    return ThunkAPI.dispatch(getTsats(resp));
   }
 );

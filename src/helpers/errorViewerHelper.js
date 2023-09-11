@@ -8,7 +8,7 @@ export const validateFormViewer = (viewer) => {
   if (rol === "Viewer") {
     if ([name, lastname, email, country, idCampaign].includes("")) {
       error = true;
-      msg = "All fields are requiered";
+      msg = "All fields are required";
     }
 
     if (password || !tpToken) {
@@ -20,7 +20,7 @@ export const validateFormViewer = (viewer) => {
   } else {
     if ([name, email, country].includes("")) {
       error = true;
-      msg = "All fields are requiered";
+      msg = "All fields are required";
     }
   }
   if (valEmail(email)) {

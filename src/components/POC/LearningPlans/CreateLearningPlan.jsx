@@ -12,7 +12,7 @@ import CreateLPDnD from "./CreateLPDnD";
 
 const CreateLearningPlan = ({ onClose, courses }) => {
 	const dispatch = useDispatch();
-	const { form, editForm, errorForm, courseSearch } = useSelector(
+	const { form, editForm, errorForm, courseSearch, tsats } = useSelector(
 		(state) => state.learningP
 	);
 	const { userData } = useSelector((state) => state.login);
@@ -30,6 +30,7 @@ const CreateLearningPlan = ({ onClose, courses }) => {
 				data: {
 					nameLP: form.name,
 					descLP: form.description,
+					idTsat: form.idTsat,
 					idCampaign: userData.idCampaign,
 					idLob: userData.idLob,
 					coursesInfo: courses,
@@ -82,6 +83,15 @@ const CreateLearningPlan = ({ onClose, courses }) => {
 			//dispatch(updateLPs(body));
 		}
 	};
+
+	const handleTsat = (e) => {
+    dispatch(
+			formLPChanges({
+				tag: "idTsat",
+				value: e.target.value,
+			})
+		)
+  };
 
 	const formValidate = (data) => {
 		let errorForm = {
@@ -194,6 +204,42 @@ const CreateLearningPlan = ({ onClose, courses }) => {
 							<span className="font-medium">{errorForm.description.desc}</span>
 						</p>
 					)}
+				</div>
+				{/* Search */}
+				<div className="flex justify-between items-center mt-3">
+					<p className="block mb-1 text-sm font-medium text-white mt-3">
+						TSAT
+					</p>
+					<div className="relative">
+						<label
+							htmlFor="tsat"
+							className="block mb-1 text-sm font-medium text-white mt-3"
+						>
+							TSAT
+						</label>
+						<select
+							id="tsat"
+							name="idTsat"
+							placeholder="Select TSAT"
+							className={`border text-md rounded-lg  block w-full p-1.5 lg:p-2.5
+							${errorForm.idTsat.status ? "border-primaryPink" : ""}
+							`}
+							value={form.idTsat || ""}
+							onChange={(e) => {
+								handleTsat(e);
+							}}
+						>
+							<option>Select TSAT</option>
+							{tsats?.map((tsat) => (
+								<option value={tsat.idTTsat} key={tsat.idTTsat}>
+									{tsat.typeTsat}
+								</option>
+							))}
+						</select>
+						{errorForm.idTsat.status && (
+							<p className="text-primaryPink text-xs">{errorForm.idTsat.msj}</p>
+						)}
+					</div>
 				</div>
 				{/* Search */}
 				<div className="flex justify-between items-center mt-3">

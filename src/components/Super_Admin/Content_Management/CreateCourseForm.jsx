@@ -12,7 +12,7 @@ import { upImageFB } from "../../../redux/firebase/courseManageSlice";
 
 const CreateCourseForm = () => {
   const dispatch = useDispatch();
-  const { newCourse, campaigns, errors, courses } = useSelector(
+  const { newCourse, campaigns, errors, courses, tsats } = useSelector(
     (state) => state.courses
   );
   const { userData } = useSelector((state) => state.login);
@@ -31,6 +31,12 @@ const CreateCourseForm = () => {
     dispatch(getDataCourses(e.target.value));
     dispatch(
       addCourse({ name: "idCampaign", value: parseInt(e.target.value) })
+    );
+  };
+
+  const handleTsat = (e) => {
+    dispatch(
+      addCourse({ name: "idTsat", value: parseInt(e.target.value) })
     );
   };
 
@@ -168,6 +174,34 @@ const CreateCourseForm = () => {
       />
       {errors.descCourse.status && (
         <p className="text-primaryPink text-xs">{errors.descCourse.msj}</p>
+      )}
+      <label
+        htmlFor="tsat"
+        className="block mb-1 text-sm font-medium text-white mt-3"
+      >
+        TSAT
+      </label>
+      <select
+        id="tsat"
+        name="idTsat"
+        placeholder="Select TSAT"
+        className={`border text-md rounded-lg  block w-full p-1.5 lg:p-2.5
+        ${errors.idTsat.status ? "border-primaryPink" : ""}
+        `}
+        value={newCourse.idTsat || ""}
+        onChange={(e) => {
+          handleTsat(e);
+        }}
+      >
+        <option>Select TSAT</option>
+        {tsats?.map((tsat) => (
+          <option value={tsat.idTTsat} key={tsat.idTTsat}>
+            {tsat.typeTsat}
+          </option>
+        ))}
+      </select>
+      {errors.idTsat.status && (
+        <p className="text-primaryPink text-xs">{errors.idTsat.msj}</p>
       )}
       <label
         htmlFor="privacity"

@@ -8,6 +8,7 @@ import Courses from "../../components/Super_Admin/Content_Management/Courses";
 import {
   cleanCourse,
   getDataCourses,
+  getTsatTypes
 } from "../../redux/SuperAdmin/cousesManageSlice";
 
 const ContentManagement = () => {
@@ -23,6 +24,10 @@ const ContentManagement = () => {
   useEffect(() => {
     dispatch(getDataCourses(account));
   }, [account]);
+
+  useEffect(() => {
+    dispatch(getTsatTypes())
+  }, [])
 
   //filtro de cursos por privacidad
   const coursesList = React.useMemo(() => {

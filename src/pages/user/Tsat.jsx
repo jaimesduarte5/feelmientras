@@ -1,68 +1,73 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { RotateSpinner } from "react-spinners-kit";
+
 import { Form } from "../../components/Tsat/Form";
 
+import { getTsatQuestions, postTsatAnswers } from "../../redux/User/coursesAgentSlice";
+
 const Tsat = () => {
-  const { isLoading } = useSelector(
+  const dispatch = useDispatch();
+  const { isLoading, tsat } = useSelector(
     (state) => state.agentLearning
   );
+  const { email } = useSelector(
+    (state) => state.login.userData
+  );
+  const languages = {
+    ES: {
+      name: 'spanishQ',
+      code: 2
+    },
+    EN: {
+      name: 'englishQ',
+      code: 1
+    }
+  }
+  const [options, setOptions] = useState([])
+  const [language, setLanguage] = useState(languages.EN)
 
-  const [options, setOptions] = useState([
-    {
-      id: '1q',
-      title: 'I fell like a 2.0 Trainer now',
-      value: '0'
-    },
-    {
-      id: '2q',
-      title: 'I am satisfied with the training',
-      value: '0'
-    },
-    {
-      id: '3q',
-      title: 'I enjoyed this learning process',
-      value: '0'
-    },
-    {
-      id: '4q',
-      title: 'I am ready to start applying the 2.0 strategies',
-      value: '0'
-    },
-    {
-      id: '5q',
-      title: 'Tools used in this training were dynamic',
-      value: '0'
-    },
-    {
-      id: '6q',
-      title: 'All topics have been covered',
-      value: '0'
-    },
-    {
-      id: '7q',
-      title: 'I would like to keep learning new subjects this way',
-      value: '0'
-    },
-    {
-      id: '8q',
-      title: 'I can do this training independently and at my own place',
-      value: '0'
-    },
-    {
-      id: '9q',
-      title: 'The purpose of the activity and its goals were clear to me',
-      value: '0'
-    },
-    {
-      id: '10q',
-      title: 'This learning strategy was helpful for me',
-      value: '0'
-    },
-  ])
+  useEffect(() => {
+    dispatch(getTsatQuestions(1)) // TODO change
+  }, [])
 
-  const handleChangeState = (value) => {
+  useEffect(() => {
+    if(tsat[language.name]) {
+      setOptions(tsat[language.name].map(option => ({
+        ...option,
+        value: '0'
+      })))
+    }
+  }, [tsat, language])
+
+  const handleChangeOptions = (value) => {
     setOptions(value)
+  }
+
+  const handleChangeLanguage = () => {
+    if(language.name === languages.EN.name) {
+      setLanguage(languages.ES)
+    }
+
+    if(language.name === languages.ES.name) {
+      setLanguage(languages.EN)
+    }
+  }
+
+  const handleSubmitData = () => {
+    const sendData = {
+      requestedBy: email,
+      idLTsat: language.code,
+      idTTsat: tsat.idTTsat,
+      idCourse: 4, // TODO change
+      idLP: null, // TODO change
+      answers: options.map(({ idQTsat, value }) => ({
+        idQTsat,
+        value
+      }))
+    }
+
+    dispatch(postTsatAnswers(sendData))
   }
 
   return (
@@ -72,7 +77,15 @@ const Tsat = () => {
           <RotateSpinner size={60} color="#FF0082" />
         </div>
       ) : (
-        <Form title='T-SAT FOR TRAINERS' options={options} handleChangeState={handleChangeState}/>
+        <>
+          <div className="flex justify-end">
+            <button type="button" className={`bg-primaryPink text-white px-2 py-1 rounded self-end`} onClick={handleChangeLanguage}>
+              {language.name === languages.EN.name && 'Español'}
+              {language.name === languages.ES.name && 'English'}
+            </button>
+          </div>
+          <Form title={tsat.typeTsat} options={options} handleChangeOptions={handleChangeOptions} handleSubmitData={handleSubmitData}/>
+        </>
       )}
     </div>
   );

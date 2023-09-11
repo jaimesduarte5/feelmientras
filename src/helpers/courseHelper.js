@@ -1,18 +1,33 @@
 export const valCourse = (data) => {
   const errorForm = {
-    idCampaign: { status: false, msj: "You need to select a campaign" },
-    nameCourse: { status: false, msj: "The name of the course is required" },
-    descCourse: { status: false, msj: "All courses required a description" },
-    activities: { status: false, msj: "All courses required a description" },
+    idCampaign: {
+      status: false,
+      msj: "You need to select a campaign"
+    },
+    nameCourse: {
+      status: false,
+      msj: "The name of the course is required"
+    },
+    descCourse: {
+      status: false,
+      msj: "All courses required a description"
+    },
+    activities: {
+      status: false,
+      msj: "All courses required a description"
+    },
     nameActivity: {
       status: false,
-      msj: "The name of the arctivity is requiered",
+      msj: "The name of the arctivity is required",
     },
     descActivity: {
       status: false,
-      msj: "The  arctivity is requiered a description",
+      msj: "The  arctivity is required a description",
     },
-    urlActivity: { status: false, msj: "Need to load a resource" },
+    urlActivity: {
+      status: false,
+      msj: "Need to load a resource"
+    },
   };
   let error = false;
   if (!data.idCampaign) {
@@ -38,17 +53,29 @@ export const valCourse = (data) => {
 // funcion para validar los campos de la creacion de actividades
 export const valActivity = (data) => {
   const errorForm = {
-    idCampaign: { status: false, msj: "You need to select a campaign" },
-    nameCourse: { status: false, msj: "The name of the course is required" },
-    descCourse: { status: false, msj: "All courses required a description" },
-    activities: { status: false, msj: "All courses required a description" },
+    idCampaign: {
+      status: false,
+      msj: "You need to select a campaign"
+    },
+    nameCourse: {
+      status: false,
+      msj: "The name of the course is required"
+    },
+    descCourse: {
+      status: false,
+      msj: "All courses required a description"
+    },
+    activities: {
+      status: false,
+      msj: "All courses required a description"
+    },
     nameActivity: {
       status: false,
-      msj: "The name of the arctivity is requiered",
+      msj: "The name of the arctivity is required",
     },
     descActivity: {
       status: false,
-      msj: "The  arctivity is requiered a description",
+      msj: "The  arctivity is required a description",
     },
     urlActivity: { status: false, msj: "Need to load a resource" },
   };
